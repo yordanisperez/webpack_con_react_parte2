@@ -10,12 +10,12 @@ Con el paquete webpack precompilamos nuestro código resolviendo las dependencia
 
 ## Conceptos:
 
-* Entry
-* Output
-* Loaders
-* Plugins
-* Mode
-* Browser Compatibility
+* [Entry](#entry)
+* [Output](#output)
+* [Loaders](#loader)
+* [Plugins](#plugin)
+* [Mode](#mode)
+
 
 ## Entry
 
@@ -24,7 +24,7 @@ Un Entry es el modulo principal por el cual debe comenzar a resolverse todo el �
 ## Ejemplo:
 
 
-```
+```js
 module.exports =
 {
     entry: 
@@ -44,17 +44,17 @@ module.exports =
 En este caso tenemos 2 puntos de entrada comp1 y comp2. Coloquemos los códigos de comp1 y comp2 para una mayor compresión de la funcionalidad.
 
 ### obj.js
-```
+```js
 export default { count: 0 };
 ```
 ### component-1.js
-```
+```js
 import obj from './obj.js';
 obj.count++;
 console.log('component-1', obj.count);
 ```
 ### component-2.js
-```
+```js
 import obj from './obj.js';
 obj.count++;
 console.log('component-2', obj.count);
@@ -63,7 +63,7 @@ console.log('component-2', obj.count);
 ## output
 El objeto `output` define los ficheros de salida convertidos o pre-compilados entendibles para el navegador. La propiedad path recibe una dirección absoluta del sistema de archivos. La propiedad filename recibe el nombre del fichero o ficheros de salida en caso de que exista más de un punto de entrada, por convención a todos se les agrega el nombre bundle. 
 
-```
+```js
 module.exports =
 {
     entry: 
@@ -96,7 +96,7 @@ component-2 1
 ```
 Salta a la vista, que el objeto obj se ha duplicado en el navegador. Se ha instanciado en 2 ocasiones no produciéndose el resultado esperado. Para evitarlo webpack recomienda usar una opción de optimización, aunque también se puede evitar estableciendo las dependencias adecuadas en cada punto de entrada, como se muestra a continuación.
 
-```
+```js
 module.exports ={
     entry: 
         {
@@ -129,7 +129,7 @@ component-1 1
 component-2 2
 ```
 La otra manera en la que webpack puede resolver estas dependencias comunes automáticamente es estableciendo una propiedad de optimización `runtimeChunk:single`.
-```
+```js
 module.exports ={
     entry: 
         {
@@ -163,7 +163,7 @@ Los loader son transformaciones que se le aplica al código fuente cuando se car
 
 > `npm install css-loader style-loader -D`
 
-```
+```js
 module.exports ={
     entry:{
             comp1:
@@ -195,7 +195,7 @@ La propiedad `module.rules` es una lista de objetos que representan reglas `.tes
 Algo a tener en cuenta es que si se importa el mismo archivo `.css` desde distintos puntos de entrada, la información de la `css` se encontrara anexa a los puntos de entrada repetidamente.
 
 ### También es posible cargar el css desde el archivo de configuración.
-```
+```js
 module.exports ={
     entry: 
         {
@@ -234,7 +234,7 @@ Procesando archivos de estilos con el preprocesador de `css SASS`. Para ello nec
 
 Instalar SASS:
 > `npm install sass-loader node-sass`
-```
+```js
 module.exports ={
     entry: {
             comp1:{
@@ -278,7 +278,7 @@ Con `html-webpack-plugin` nos permite procesar archivos `html` con `webpack` y `
 
 ### Ejemplo:
 Ambos plugin se requieren en el archivo de configuración. En el caso de `miniCssExtractPlugin` tiene incluido un loader de `css`, el cual reemplazara al loader `style-loader`
-```
+```js
 const htmlWebpackPlugin =require('html-webpack-plugin');
 const miniCssExtractPlugin=require('mini-css-extract-plugin');
 
@@ -333,7 +333,7 @@ module.exports ={
 
 ### Ejecutando nuestro servidor de desarrollo local
 > `npx webpack serve`
-```
+```js
 module.exports ={
     mode: 'development', //production or development
     devtool: 'eval-source-map',//eval or eval-source-map or https://webpack.js.org/configuration/devtool/
@@ -349,7 +349,7 @@ Algunas consideraciones respecto a la configuración del package .json conjuntam
 
 Esto significa que todas estas dependencias las instalaremos en modo desarrollo, es decir en modo producción no nos interesan debido a que después de preprocesado y generado nuestros códigos, todo quedara en lenguaje js, html y css entendible para el navegador. 
 Nuestro package.json quedaría de la siguiente forma:
-```
+```js
 {
   "name": "webpack-sample",
   "version": "1.0.0",
