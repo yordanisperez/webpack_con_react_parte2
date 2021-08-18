@@ -1,31 +1,38 @@
 {
-  "name": "webpack-sample",
+  "name": "webpack-react-webpack",
   "version": "1.0.0",
-  "description": "",
+  "description": "Un proyecto optimizado para desarrollo y producción con react y webpack",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --config config/webpack.production.js",
+    "start": "webpack serve --config config/webpack.develop.js"
   },
-  "keywords": [],
+  "keywords": ["react","webpack"],
   "author": "Yordanis",
   "license": "ISC",
   "devDependencies": {
-    "babel-core": "^6.26.3",
+    "@babel/core": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "@babel/preset-react": "^7.14.5",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
     "babel-loader": "^8.2.2",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
+    "clean-webpack-plugin": "*",
     "css-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.2",
     "mini-css-extract-plugin": "^2.2.0",
     "node-sass": "^6.0.1",
+    "react-refresh": "^0.9.0",
     "sass-loader": "^12.1.0",
     "style-loader": "^3.2.1",
     "webpack": "^5.50.0",
     "webpack-cli": "^4.7.2",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.8.0"
   },
   "dependencies": {
+    "core-js": "^3.16.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
-  }
+  },
+  "browserslist": "> 0.25%, not dead, not ie 11"
 }
